@@ -1,0 +1,181 @@
+# Build artifacts
+bin/
+build/
+*.o
+*.a
+*.so
+*.dylib
+
+# Executables
+unionfs
+*.exe
+*.out
+
+# CMake
+CMakeFiles/
+CMakeLists.txt.user
+cmake_install.cmake
+Makefile.user
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.clangd
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Test files and directories
+/tmp/
+/tmp.*/
+test_output/
+test_*.log
+*.log
+
+# FUSE mount points (be careful with these!)
+/mnt/
+*.mount
+
+# Temporary files
+*.tmp
+*.temp
+.tmp*
+.cache
+
+# OS files
+.DS_Store
+Thumbs.db
+.directory
+
+# Editor backups
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Tag files
+tags
+.tags
+TAGS
+
+# Ctags
+.ctags
+
+# Local configuration
+.env
+.env.local
+config.local.ini
+
+# Dependency files
+.dependencies
+depends/
+
+# Memory/profiling
+*.prof
+*.pprof
+perf.data
+perf.data.old
+
+# Specific to project
+/test_results/
+/benchmarks/
+*.valgrind
+callgrind.out.*
+
+# Build output
+*.so.*
+*.a.*
+
+# Qt/GUI related
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# Compiled test binaries
+test_*
+
+# System specific
+.wine/
+.vagrant/
+*.vmdk
+*.vdi
+
+# Network/SSH
+.ssh/
+.known_hosts
+
+# Session files
+.session
+*.session
+
+# Lock files (but keep if shared)
+*.lock
+!.lock
+
+# Package manager
+.npm
+.yarn
+node_modules/
+
+# Docker
+.dockerignore
+.docker/
+
+# Vagrant
+.vagrant/
+vagrant_log.txt
+
+# CI/CD
+.github/workflows/cache/
+.gitlab-ci-local/
+
+# Keep test scripts but ignore test data
+!/scripts/
+/scripts/test_output/
+
+# Keep documentation
+!*.md
+!*.txt
+!LICENSE
+
+# Specific exclusions for this project
+!/bin  # We want bin directory tracked for README purposes
+bin/*
+!bin/.gitkeep
+
+# FUSE specific
+.fuse_hidden*

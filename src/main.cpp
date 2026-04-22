@@ -9,21 +9,24 @@
 #include <cstring>
 #include <sys/stat.h>
 
-static struct fuse_operations ops = {
-    .getattr  = fs_getattr,
-    .mkdir    = fs_mkdir,
-    .unlink   = fs_unlink,
-    .rmdir    = fs_rmdir,
-    .truncate = fs_truncate,
-    .open     = fs_open,
-    .read     = fs_read,
-    .write    = fs_write,
-    .release  = fs_release,
-    .readdir  = fs_readdir,
-    .create   = fs_create,
-    .utimens  = fs_utimens,
-    .chmod    = fs_chmod,
-};
+static struct fuse_operations ops;
+
+static void init_fuse_ops() {
+    memset(&ops, 0, sizeof(ops));
+    ops.getattr  = fs_getattr;
+    ops.mkdir    = fs_mkdir;
+    ops.unlink   = fs_unlink;
+    ops.rmdir    = fs_rmdir;
+    ops.truncate = fs_truncate;
+    ops.open     = fs_open;
+    ops.read     = fs_read;
+    ops.write    = fs_write;
+    ops.release  = fs_release;
+    ops.readdir  = fs_readdir;
+    ops.create   = fs_create;
+    ops.utimens  = fs_utimens;
+    ops.chmod    = fs_chmod;
+}
 
 static void usage(const char* prog) {
     fprintf(stderr, "Usage: %s <lowerdir> <upperdir> <mountpoint> [FUSE options]\n", prog);
@@ -34,6 +37,8 @@ int main(int argc, char* argv[]) {
         usage(argv[0]);
         return 1;
     }
+
+    init_fuse_ops();
 
     State* state = new State();
     state->lower_dir = argv[1];

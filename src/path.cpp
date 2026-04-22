@@ -115,13 +115,13 @@ int fs_readdir(const char* path, void* buf, fuse_fill_dir_t filler,
 int fs_read(const char* path, char* buf, size_t size, off_t offset,
             struct fuse_file_info* fi) {
     (void)path;
-    int n = pread(fh_to_fd(fi->fh), buf, size, offset);
+    int n = pread((int)fi->fh, buf, size, offset);
     return (n == -1) ? -errno : n;
 }
 
 int fs_release(const char* path, struct fuse_file_info* fi) {
     (void)path;
-    if (fi->fh) close(fh_to_fd(fi->fh));
+    if (fi->fh) close((int)fi->fh);
     return 0;
 }
 
