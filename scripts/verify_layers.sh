@@ -1,6 +1,8 @@
 #!/bin/bash
 # Verify layer separation and integrity
 
+set -x
+
 BASE_DIR="/tmp/unionfs_test"
 LOWER_DIR="$BASE_DIR/lower"
 UPPER_DIR="$BASE_DIR/upper"

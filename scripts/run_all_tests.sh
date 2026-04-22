@@ -1,6 +1,8 @@
 #!/bin/bash
 # Run all tests in sequence
 
+set -x
+
 BASE_DIR="/tmp/unionfs_test"
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

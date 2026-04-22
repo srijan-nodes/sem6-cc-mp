@@ -23,14 +23,16 @@ class WorkerThread(QThread):
     output_signal = pyqtSignal(str)
     finished_signal = pyqtSignal(bool, str)  # success, message
 
-    def __init__(self, script_path):
+    def __init__(self, script_path, args=None):
         super().__init__()
         self.script_path = script_path
+        self.args = args if args else []
 
     def run(self):
         try:
+            cmd = ["bash", self.script_path] + self.args
             result = subprocess.run(
-                ["bash", self.script_path],
+                cmd,
                 capture_output=True,
                 text=True,
                 timeout=300
@@ -48,7 +50,7 @@ class WorkerThread(QThread):
 class UnionFSGUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.script_dir = Path(__file__).parent
+        self.script_dir = Path(__file__).parent / "scripts"
         self.base_dir = "/tmp/unionfs_test"
         self.worker = None
         self.init_ui()
@@ -436,7 +438,7 @@ For command-line testing, see: `scripts/README.md`
         )
         if reply == QMessageBox.Yes:
             self.log_output("→ Cleaning up...")
-            self.run_script(str(self.script_dir / "unmount.sh") + " clean")
+            self.run_script(str(self.script_dir / "unmount.sh"), ["clean"])
 
     def run_test(self, script_name):
         """Run a single test"""
@@ -448,7 +450,7 @@ For command-line testing, see: `scripts/README.md`
         self.log_output("→ Running complete test suite...")
         self.run_script(str(self.script_dir / "run_all_tests.sh"))
 
-    def run_script(self, script_path):
+    def run_script(self, script_path, args=None):
         """Run a script in a worker thread"""
         if not os.path.exists(script_path):
             QMessageBox.critical(self, "Error", f"Script not found: {script_path}")
@@ -460,7 +462,7 @@ For command-line testing, see: `scripts/README.md`
         self.progress.setValue(0)
 
         # Create and start worker thread
-        self.worker = WorkerThread(script_path)
+        self.worker = WorkerThread(script_path, args)
         self.worker.output_signal.connect(self.log_output)
         self.worker.finished_signal.connect(self.on_test_finished)
         self.worker.start()

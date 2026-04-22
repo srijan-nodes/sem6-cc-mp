@@ -1,6 +1,8 @@
 #!/bin/bash
 # Unmount the unionfs and optionally cleanup
 
+set -x
+
 BASE_DIR="/tmp/unionfs_test"
 MOUNT_DIR="$BASE_DIR/mount"
 

@@ -2,6 +2,7 @@
 # Setup test directories and initial files for unionfs testing
 
 set -e
+set -x
 
 BASE_DIR="/tmp/unionfs_test"
 LOWER_DIR="$BASE_DIR/lower"
