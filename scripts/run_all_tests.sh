@@ -8,20 +8,16 @@ echo "╔═══════════════════════�
 echo "║     Union FS - Complete Test Suite              ║"
 echo "╚════════════════════════════════════════════════╝"
 echo ""
-
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
-
 FAILED_TESTS=()
 PASSED_TESTS=()
-
 run_test() {
     local test_name=$1
     local script=$2
-
     echo -e "${YELLOW}Running:${NC} $test_name"
 
     if bash "$script" > /tmp/test_output.log 2>&1; then
